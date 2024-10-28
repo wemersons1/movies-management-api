@@ -15,21 +15,16 @@ interface Params {
     sort_by: string;
 }
 
-class ListMovieService {
-
+class ListTheMoviesDBService {
     async execute(params: Params) {
         const response = await axios.get('/discover/movie', {
             params
         });
         
         if(response) {
-            const { data: movies } = response;
-         
-            return movies;
+            return response.data;
         }
-
-        console.log(response.data);
     }
 }
 
-export { ListMovieService }
+export { ListTheMoviesDBService }
