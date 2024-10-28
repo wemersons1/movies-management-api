@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { ListMoviesService } from "../services/Movie/ListMoviesService";
 import { SyncTheMoviesDBPaginatedService } from "../services/TheMovieDB/SyncTheMoviesDBPaginatedService";
 
 class TheMovieDBController {
