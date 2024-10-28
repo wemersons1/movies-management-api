@@ -1,15 +1,5 @@
 import axios from "../../lib/axios";
 
-interface DataMovie {
-    first_name: string;
-    last_name: string;
-    years: string;
-    role_id: number;
-    email: string;
-    image: string;
-    id: number;
-} 
-
 interface Params {
     page: number;
     sort_by: string;

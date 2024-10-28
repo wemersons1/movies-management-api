@@ -4,13 +4,14 @@ import dbClient from "../../src/dbClient";
 export const movieGenderSeeder = async () => {
     const data = getDataMovieGenre();
     await dbClient.movieGenre.createMany({
-        data
+        data,
+        skipDuplicates: true
     });
 }
 
 const getDataMovieGenre = () => {
     return [
-        {
+          {
             "id": GENRE_ACTION,
             "name": "Action"
           },

@@ -1,7 +1,6 @@
 -- CreateTable
 CREATE TABLE `movies` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `external_id` INTEGER NOT NULL,
     `adult` BOOLEAN NOT NULL,
     `original_title` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
