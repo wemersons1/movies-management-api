@@ -17,7 +17,7 @@ Você está pronto para rodar agora.
 
 ## Comando para subir filmes para a aplicação
 
-- Ao subir a aplicação o seguinte comando subirá alguns filmes: `docker-compose exec app bash -c "npm install"`
+- Ao subir a aplicação o seguinte comando subirá alguns filmes: `docker-compose exec app bash -c "npm run command:get-movies"`
 
 ## Endpoints disponíveis
 
