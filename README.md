@@ -15,15 +15,11 @@ Você está pronto para rodar agora.
 
 - `Está disponível em http://localhost:3000`
 
+## Comando para subir filmes para a aplicação
+
+- Ao subir a aplicação o seguinte comando subirá alguns filmes: `docker-compose exec app bash -c "npm install"`
+
 ## Endpoints disponíveis
 
-- Login: POST localhost:3000/login
-- Create User: POST localhost:3000/users
-  - {"email": "test@teste.com", "password": "123456", "first_name": "Jhon", "last_name": "Doe"}
-- Find user [Authentication required]: GET localhost:3000/users/{user_id}
-- List user [Authentication required]: GET localhost:3000/users
-- Update user [Authentication required]: PUT localhost:3000/users/{user_id}
-  - {"email": "test@teste.com", "first_name": "Jhon", "last_name": "Doe"}
-- Update image user [Authentication required]: PUT localhost:3000/users/image/{user_id}
-  - "image": form data
-- Delete user [Authentication required]: DELETE localhost:3000/users/{user_id}
+- Sincroniza os filmes: POST localhost:3000/sync-themoviedb
+- Lista os filmes: GET localhost:3000/movies

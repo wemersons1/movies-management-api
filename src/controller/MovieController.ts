@@ -3,16 +3,13 @@ import { ListMoviesService } from "../services/Movie/ListMoviesService";
 
 class MovieController {
     async index(req: Request, res: Response) {
-        const { params } = req;
+        const { query } = req;
         const filter = {
-            page: params.page ? +params.page : 1,
-            genre_id: +params.page, 
-            release_date: params.page, 
-            title: params.title
+            page: typeof +query.page == 'number' ? +query.page : 1, 
+            title: typeof query.title == 'string' ? query.title : ''
         }
 
         const listMoviesService = new ListMoviesService();
-
         const movies =  await listMoviesService.execute(filter);   
 
         res.json(movies);

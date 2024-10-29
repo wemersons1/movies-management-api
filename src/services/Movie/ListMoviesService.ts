@@ -2,25 +2,26 @@ import dbClient from "../../dbClient";
 
 interface Filter {
     page: number;
-    genre_id: number;
-    release_date: string;
-    title: string;
+    title?: string;
 }
 
-const PER_PAGE = 15;
+const PER_PAGE = 12;
 class ListMoviesService {
     async execute(params: Filter) {
-        const { page } = params;
-
+        const { page, title } = params;
+    
         const [data, total] = await Promise.all([
-            await dbClient.movie.findMany({
-              skip: (page - 1) * PER_PAGE,
-              take: PER_PAGE,
-              orderBy: { release_date: 'asc' },
+            dbClient.movie.findMany({
+                skip: (page - 1) * PER_PAGE,
+                take: PER_PAGE,
+                orderBy: { release_date: 'asc' },
+                where: title ? { title: { contains: title } } : undefined,
             }),
-            dbClient.movie.count(),
-          ]);
-          
+            dbClient.movie.count({
+                where: title ? { title: { contains: title } } : undefined,
+            }),
+        ]);
+    
         return {
             current_page: page,
             last_page: Math.ceil(total / PER_PAGE),

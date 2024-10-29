@@ -4,8 +4,8 @@ import { ListTheMoviesDBService } from "./ListTheMoviesDBService";
 
 interface Params {
     page: number;
-    release_init?: string;
-    release_end?: string;
+    release_date_init?: string;
+    release_date_end?: string;
     sort_by: string;
 }
 
@@ -15,7 +15,11 @@ class SyncMoviesDBService {
         const createBundleMoviesService = new CreateBundleMoviesService();
         const createBundleMoviesHasGenreService = new CreateMovieHasGenreService();
 
-        const { results, total_pages } = await listMoviesService.execute(params);
+        const { results, total_pages } = await listMoviesService.execute({
+            ...params,
+            'primary_release_date.gte': params.release_date_init,
+            'primary_release_date.lte': params.release_date_end
+        });
         await this.createBundleMovies(results, createBundleMoviesService);
         await this.createBundleMoviesHasGenres(results, createBundleMoviesHasGenreService);
 
@@ -30,7 +34,7 @@ class SyncMoviesDBService {
                 original_title: movie.original_title,
                 title: movie.title,
                 overview: movie.overview,
-                poster_path: movie.poster_path,
+                poster_path: `${process.env.MOVIE_IMAGE_BASE}${movie.poster_path}`,
                 release_date: this.getReleaseDate(movie.release_date)
             }
         });

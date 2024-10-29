@@ -1,27 +1,25 @@
 import { SyncMoviesDBService } from "./SyncMoviesDBService";
 
 interface Params {
-    release_init?: string;
-    release_end?: string;
+    release_date_init?: string;
+    release_date_end?: string;
 }
 
 class SyncTheMoviesDBPaginatedService {
     async execute(params: Params):Promise<void> {
         const syncMoviesDBService = new SyncMoviesDBService();
-        let currentPage = 1;
+        const maxPages = 1000;
 
-        while (true) {
+        for (let currentPage = 1; currentPage <= maxPages; currentPage++) {
             const totalPages = await syncMoviesDBService.execute({
-                                ...params,
-                                page: currentPage,
-                                sort_by: 'primary_release_date.asc'
-                            });
+                ...params,
+                page: currentPage,
+                sort_by: 'primary_release_date.asc',
+            });
 
-            if (currentPage == totalPages) {
-                break;
+            if (currentPage >= totalPages) {
+                break
             }
-
-            currentPage ++;
         }
     }
 }

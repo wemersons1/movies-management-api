@@ -3,6 +3,8 @@ import axios from "../../lib/axios";
 interface Params {
     page: number;
     sort_by: string;
+    'primary_release_date.gte'?: string;
+    'primary_release_date.lte'?: string;
 }
 
 class ListTheMoviesDBService {
